@@ -39,13 +39,14 @@ export default function UserRow({
     startTransition(() => {
       updateUserRoleAction(id, newRole)
     })
+     router.refresh()
   }
 
   // New async delete handler without useAction
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      await deleteUserAction()
+      await deleteUserAction(email)
             router.refresh() // pass id to action if needed
       // optionally, do something after deletion, e.g. refresh list or notify parent
     } catch (error) {

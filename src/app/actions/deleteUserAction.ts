@@ -6,14 +6,14 @@ import { auth } from "@/auth";
 
 
 
-export async function deleteUserAction(){
+export async function deleteUserAction(email: string) {
   const session = await auth();
   if (!session?.user?.email) {
     throw new Error("Not authenticated");
   }
 
-  console.log("Deleting user with email:", session.user.email);
+  console.log("Deleting user with email:", email);
 
-  await db.delete(users).where(eq(users.email, session.user.email!));
+  await db.delete(users).where(eq(users.email, email!));
   return { message: "User deleted successfully" };
 };
